@@ -1,7 +1,7 @@
 """The metrics module implements functions assessing prediction error for specific purposes."""
 
 import numpy as np
-
+import sklearn.metrics
 def trapz(x, y):
     """Trapezoidal rule for integrating
     the curve defined by x-y pairs.
@@ -18,3 +18,10 @@ def trapz(x, y):
         area += 0.5*(sx[ix+1]-sx[ix])*(sy[ix+1]+sy[ix])
     return area
 
+def auc(y_true, y_score):
+    return sklearn.metrics.roc_auc_score(y_true, y_score)
+
+test_score = [i/10 for i in range(10)]
+test_true = 5*[0] + 5*[1]
+print(auc(test_true, test_score))
+print(test_score, test_true)
